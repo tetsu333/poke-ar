@@ -1,15 +1,14 @@
 <p style="color: green"><%= notice %></p>
 <p style="color: red"><%= alert %></p>
 
-<h1>Pokemons</h1>
-
+<h1>ボックス</h1>
+<%= link_to "登録", new_pokemon_path %>
 <div id="pokemons">
   <% @pokemons.each do |pokemon| %>
-    <%= render pokemon %>
     <p>
-      <%= link_to "Show this pokemon", pokemon %>
+      <span><%= pokemon.pokedex_number %>:</span>
+      <%= link_to "#{pokemon.name}", pokemon %>
+      <img src="<%= pokemon.image_url %>" alt="<%= pokemon.image_url %>の画像" height="16" width="16" />
     </p>
   <% end %>
 </div>
-
-<%= link_to "New pokemon", new_pokemon_path %>

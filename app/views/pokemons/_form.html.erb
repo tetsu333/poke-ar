@@ -1,10 +1,10 @@
 <%= form_with(model: pokemon) do |form| %>
   <div>
-    <%= form.label :pokedex_number, style: "display: block" %>
+    <%= form.label :pokedex_number, "図鑑番号", style: "display: block" %>
     <%= form.number_field :pokedex_number %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "実行" %>
   </div>
 <% end %>

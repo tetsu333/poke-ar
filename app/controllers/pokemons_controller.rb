@@ -3,7 +3,7 @@ class PokemonsController < ApplicationController
 
   # GET /pokemons
   def index
-    @pokemons = Pokemon.all
+    @pokemons = Pokemon.all.order(:pokedex_number)
   end
 
   # GET /pokemons/1
@@ -23,7 +23,7 @@ class PokemonsController < ApplicationController
   def create
     @pokemon = PokemonFetchJob.perform_now(pokemon_params[:pokedex_number])
     if @pokemon.persisted?
-      redirect_to pokemons_path, notice: "#{@pokemon.name}が保存されました。"
+      redirect_to pokemons_path, notice: "#{@pokemon.name}が登録されました。"
     else
       redirect_to pokemons_path, alert: "エラーが発生しました。"
     end
