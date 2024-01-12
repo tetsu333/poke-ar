@@ -34,7 +34,7 @@ class PokemonsController < ApplicationController
   def update
     @pokemon = PokemonFetchJob.perform_now(pokemon_params[:pokedex_number])
     if @pokemon.persisted?
-      redirect_to pokemons_path, notice: "#{@pokemon.name}が更新されました。"
+      redirect_to pokemons_path, notice: "新しい#{@pokemon.name}に交換されました。"
     else
       redirect_to pokemons_path, alert: "エラーが発生しました。"
     end
@@ -43,7 +43,7 @@ class PokemonsController < ApplicationController
   # DELETE /pokemons/1
   def destroy
     @pokemon.destroy!
-    redirect_to pokemons_url, notice: "Pokemon was successfully destroyed.", status: :see_other
+    redirect_to pokemons_path, notice: "#{@pokemon.name}を逃しました。"
   end
 
   private
