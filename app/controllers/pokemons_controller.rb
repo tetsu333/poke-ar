@@ -32,10 +32,11 @@ class PokemonsController < ApplicationController
 
   # PATCH/PUT /pokemons/1
   def update
-    if @pokemon.update(pokemon_params)
-      redirect_to @pokemon, notice: "Pokemon was successfully updated.", status: :see_other
+    @pokemon = PokemonFetchJob.perform_now(pokemon_params[:pokedex_number])
+    if @pokemon.persisted?
+      redirect_to pokemons_path, notice: "#{@pokemon.name}が更新されました。"
     else
-      render :edit, status: :unprocessable_entity
+      redirect_to pokemons_path, alert: "エラーが発生しました。"
     end
   end
 
@@ -46,7 +47,6 @@ class PokemonsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_pokemon
       @pokemon = Pokemon.find(params[:id])
     end

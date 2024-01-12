@@ -1,10 +1,16 @@
-<h1>Editing pokemon</h1>
+<h1>更新</h1>
 
-<%= render "form", pokemon: @pokemon %>
-
-<br>
+<%= form_with(model: @pokemon) do |form| %>
+  <div>
+    <%= form.label :pokedex_number, "#{@pokemon.pokedex_number}:#{@pokemon.name}", style: "display: block" %>
+    <%= form.hidden_field :pokedex_number %>
+  </div>
+  <img src="<%= @pokemon.image_url %>" alt="<%= @pokemon.name %>の画像" heigth="200" width="200" />
+  <div>
+    <%= form.submit "実行" %>
+  </div>
+<% end %>
 
 <div>
-  <%= link_to "Show this pokemon", @pokemon %> |
-  <%= link_to "Back to pokemons", pokemons_path %>
+  <%= link_to "戻る", pokemons_path %>
 </div>

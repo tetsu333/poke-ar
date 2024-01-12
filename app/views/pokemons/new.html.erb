@@ -1,6 +1,15 @@
 <h1>登録</h1>
 
-<%= render "form", pokemon: @pokemon %>
+<%= form_with(model: @pokemon) do |form| %>
+  <div>
+    <%= form.label :pokedex_number, "図鑑番号", style: "display: block" %>
+    <%= form.number_field :pokedex_number %>
+  </div>
+
+  <div>
+    <%= form.submit "実行" %>
+  </div>
+<% end %>
 
 <div>
   <%= link_to "戻る", pokemons_path %>
