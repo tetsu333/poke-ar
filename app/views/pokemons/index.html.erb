@@ -7,7 +7,7 @@
   <% @pokemons.each do |pokemon| %>
     <p>
       <span><%= pokemon.pokedex_number %>:</span>
-      <%= link_to "#{pokemon.name}", pokemon %>
+      <%= link_to "#{pokemon.name}", pokemon, target: "_blank" %>
       <img src="<%= pokemon.image_url %>" alt="<%= pokemon.image_url %>の画像" height="16" width="16" />
     </p>
   <% end %>

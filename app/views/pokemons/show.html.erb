@@ -1,10 +1,6 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @pokemon %>
-
-<div>
-  <%= link_to "Edit this pokemon", edit_pokemon_path(@pokemon) %> |
-  <%= link_to "Back to pokemons", pokemons_path %>
-
-  <%= button_to "Destroy this pokemon", @pokemon, method: :delete %>
-</div>
+<a-scene>
+  <a-entity animation="property: object3D.position.y; to: 0.2; dir: alternate; dur: 2000; loop: true"> 
+    <a-image src="<%= @pokemon.image_url %>" width="2" height="2" position="0 1 -5"></a-image>
+  </a-entity>
+</a-scene>
+<button onclick="window.close();", style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);">×</button>
