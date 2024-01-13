@@ -36,22 +36,38 @@ RSpec.describe "Pokemons", type: :request do
   end
 
   describe "POST /pokemons" do
-    it "新しいポケモンを作成してリダイレクトすること" do
-      expect {
-        post pokemons_path, params: { pokemon: { pokedex_number: 1 } }
-      }.to change(Pokemon, :count).by(1)
-
-      expect(response).to have_http_status(302)
+    context "既存のポケモンがある場合" do
+      let!(:pokemon) { create(:pokemon) }
+  
+      it "ポケモンを登録せずにリダイレクトすること" do
+        expect {
+          post pokemons_path, params: { pokemon: { pokedex_number: pokemon.pokedex_number } }
+        }.not_to change(Pokemon, :count)
+  
+        expect(response).to have_http_status(302)
+      end
     end
-
-    it "エラーを処理してリダイレクトすること" do
-      expect {
-        post pokemons_path, params: { pokemon: { pokedex_number: 0 } }
-      }.not_to change(Pokemon, :count)
-
-      expect(response).to have_http_status(302)
+  
+    context "新しいポケモンを登録する場合" do
+      it "新しいポケモンを登録してリダイレクトすること" do
+        expect {
+          post pokemons_path, params: { pokemon: { pokedex_number: 1 } }
+        }.to change(Pokemon, :count).by(1)
+  
+        expect(response).to have_http_status(302)
+      end
     end
-  end
+  
+    context "図鑑番号以外のパラメータな場合" do
+      it "エラーを処理してリダイレクトすること" do
+        expect {
+          post pokemons_path, params: { pokemon: { pokedex_number: 99999 } }
+        }.not_to change(Pokemon, :count)
+    
+        expect(response).to have_http_status(302)
+      end
+    end
+  end   
 
   describe "PATCH /pokemons/:id" do
     let(:pokemon) { create(:pokemon) }

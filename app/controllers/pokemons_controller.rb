@@ -22,21 +22,22 @@ class PokemonsController < ApplicationController
 
   # POST /pokemons
   def create
-    @pokemon = PokemonFetchJob.perform_now(pokemon_params[:pokedex_number])
+    return redirect_to pokemons_path, alert: "既に登録済みです" if Pokemon.find_by(pokedex_number: pokemon_params[:pokedex_number])
+    @pokemon, message = PokemonFetchJob.perform_now(pokemon_params[:pokedex_number])
     if @pokemon.persisted?
       redirect_to pokemons_path, notice: "#{@pokemon.name}が登録されました。"
     else
-      redirect_to pokemons_path, alert: "エラーが発生しました。"
+      redirect_to pokemons_path, alert: message
     end
   end
 
   # PATCH/PUT /pokemons/1
   def update
-    @pokemon = PokemonFetchJob.perform_now(pokemon_params[:pokedex_number])
+    @pokemon, message = PokemonFetchJob.perform_now(pokemon_params[:pokedex_number])
     if @pokemon.persisted?
       redirect_to pokemons_path, notice: "新しい#{@pokemon.name}に交換されました。"
     else
-      redirect_to pokemons_path, alert: "エラーが発生しました。"
+      redirect_to pokemons_path, alert: message
     end
   end
 

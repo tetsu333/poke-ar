@@ -26,9 +26,9 @@ class PokemonFetchJob < ApplicationJob
       image_url: image_url
     )
     pokemon.save!
-    pokemon
+    [pokemon]
   rescue => e
     Rails.logger.error "Error fetching Pokemon data: #{e.message}"
-    Pokemon.new
+    [Pokemon.new, e]
   end
 end
