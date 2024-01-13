@@ -1,16 +1,12 @@
-<h1>交換</h1>
-
+<h1 class="text-4xl font-bold mb-4">交換</h1>
 <%= form_with(model: @pokemon) do |form| %>
-  <div>
-    <%= form.label :pokedex_number, "#{@pokemon.pokedex_number}:#{@pokemon.name}", style: "display: block" %>
+  <div class="mb-4">
+    <%= form.label :pokedex_number, "#{@pokemon.pokedex_number}:#{@pokemon.name}", class: "text-lg font-bold mb-2" %>
     <%= form.hidden_field :pokedex_number %>
   </div>
-  <img src="<%= @pokemon.image_url %>" alt="<%= @pokemon.name %>の画像" heigth="200" width="200" />
-  <div>
-    <%= form.submit "実行" %>
-  </div>
+  <%= form.submit "実行", class: "text-lg text-white bg-green-500 hover:bg-green-700 font-bold py-2 px-4 rounded" %>
+  <img src="<%= @pokemon.image_url %>" alt="<%= @pokemon.name %>の画像" class="h-50 w-50 mb-4" />
 <% end %>
-
-<div>
-  <%= link_to "戻る", pokemons_path %>
+<div class="my-4">
+  <%= link_to "戻る", pokemons_path, class: "text-lg text-white bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded" %>
 </div>
