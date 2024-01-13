@@ -2,9 +2,9 @@
 <%= form_with(model: @pokemon) do |form| %>
   <div class="mb-4">
     <%= form.label :pokedex_number, "図鑑番号", class: "block text-lg font-bold mb-2" %>
-    <%= form.number_field :pokedex_number, class: "mt-1 block w-1/3 py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+    <%= form.number_field :pokedex_number, min: 1, class: "mt-1 block w-1/3 py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", required: true %>
   </div>
-  <%= form.submit "実行", class: "text-lg text-white bg-green-500 hover:bg-green-700 font-bold py-2 px-4 rounded" %>
+  <%= form.submit "実行", data: { disable: true }, class: "text-lg text-white bg-green-500 hover:bg-green-700 font-bold py-2 px-4 rounded" %>
 <% end %>
 <div class="mt-4">
   <%= link_to "戻る", pokemons_path, class: "text-lg text-white bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded" %>
