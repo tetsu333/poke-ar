@@ -26,8 +26,7 @@ class PokemonFetchJob < ApplicationJob
 
   def fetch_japanese_name(species_url)
     species_data = PokeapiClient.fetch_japanese_name(species_url)
-    names = species_data["names"]
-    names.find { |v| v["language"]["name"] == "ja" }["name"]
+    species_data["names"].find { |v| v["language"]["name"] == "ja" }["name"]
   end
 
   def select_image_url(pokemon_data, current_image_url)
