@@ -76,7 +76,7 @@ RSpec.describe "Pokemons", type: :request do
   end   
 
   describe "PATCH /pokemons/:id" do
-    let(:pokemon) { create(:pokemon) }
+    let!(:pokemon) { create(:pokemon) }
 
     context "登録済みポケモンを更新する場合" do
       it "image_urlを更新してリダイレクトすること" do
