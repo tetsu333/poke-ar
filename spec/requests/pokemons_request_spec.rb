@@ -36,35 +36,41 @@ RSpec.describe "Pokemons", type: :request do
   end
 
   describe "POST /pokemons" do
-    context "既存のポケモンがある場合" do
+    context "登録済みポケモンのpokedex_numberな場合" do
       let!(:pokemon) { create(:pokemon) }
   
       it "ポケモンを登録せずにリダイレクトすること" do
-        expect {
-          post pokemons_path, params: { pokemon: { pokedex_number: pokemon.pokedex_number } }
-        }.not_to change(Pokemon, :count)
-  
-        expect(response).to have_http_status(302)
-      end
-    end
-  
-    context "新しいポケモンを登録する場合" do
-      it "新しいポケモンを登録してリダイレクトすること" do
-        expect {
-          post pokemons_path, params: { pokemon: { pokedex_number: 1 } }
-        }.to change(Pokemon, :count).by(1)
-  
-        expect(response).to have_http_status(302)
-      end
-    end
-  
-    context "図鑑番号以外のパラメータな場合" do
-      it "エラーを処理してリダイレクトすること" do
-        expect {
-          post pokemons_path, params: { pokemon: { pokedex_number: 99999 } }
-        }.not_to change(Pokemon, :count)
+        VCR.use_cassette("pokeapi") do
+          expect {
+            post pokemons_path, params: { pokemon: { pokedex_number: pokemon.pokedex_number } }
+          }.not_to change(Pokemon, :count)
     
-        expect(response).to have_http_status(302)
+          expect(response).to have_http_status(302)
+        end
+      end
+    end
+  
+    context "未登録ポケモンのpokedex_numberな場合" do
+      it "新しいポケモンを登録してリダイレクトすること" do
+        VCR.use_cassette("pokeapi") do
+          expect {
+            post pokemons_path, params: { pokemon: { pokedex_number: 25 } }
+          }.to change(Pokemon, :count).by(1)
+    
+          expect(response).to have_http_status(302)
+        end
+      end
+    end
+  
+    context "エラーが発生する場合" do
+      it "ポケモンを登録せずにリダイレクトすること" do
+        VCR.use_cassette("pokeapi") do
+          expect {
+            post pokemons_path, params: { pokemon: { pokedex_number: 0 } }
+          }.not_to change(Pokemon, :count)
+      
+          expect(response).to have_http_status(302)
+        end
       end
     end
   end   
@@ -72,22 +78,34 @@ RSpec.describe "Pokemons", type: :request do
   describe "PATCH /pokemons/:id" do
     let(:pokemon) { create(:pokemon) }
 
-    it "既存のポケモンを更新してリダイレクトすること" do
-      old_image_url = pokemon.image_url
+    context "登録済みポケモンを更新する場合" do
+      it "image_urlを更新してリダイレクトすること" do
+        old_image_url = pokemon.image_url
+        old_name = pokemon.name
+        old_pokedex_number = pokemon.pokedex_number
 
-      expect {
-        patch pokemon_path(pokemon), params: { pokemon: { pokedex_number: 1 } }
-      }.to change { pokemon.reload.image_url }
+        VCR.use_cassette("pokeapi") do
+          expect {
+            patch pokemon_path(pokemon), params: { pokemon: { pokedex_number: 25 } }
+          }.to change { pokemon.reload.image_url }
 
-      expect(response).to have_http_status(302)
+          expect(pokemon.reload.name).to eq(old_name)
+          expect(pokemon.reload.pokedex_number).to eq(old_pokedex_number)
+          expect(response).to have_http_status(302)
+        end
+      end
     end
 
-    it "エラーを処理してリダイレクトすること" do
-      expect {
-        patch pokemon_path(pokemon), params: { pokemon: { pokedex_number: -1 } }
-      }.not_to change { Pokemon.find(pokemon.id).image_url }
+    context "エラーが発生する場合" do
+      it "更新せずにリダイレクトすること" do
+        VCR.use_cassette("pokeapi") do
+          expect {
+            patch pokemon_path(pokemon), params: { pokemon: { pokedex_number: -1 } }
+          }.not_to change { Pokemon.find(pokemon.id).attributes }
 
-      expect(response).to have_http_status(302)
+          expect(response).to have_http_status(302)
+        end
+      end
     end
   end
 
