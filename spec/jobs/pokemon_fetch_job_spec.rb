@@ -34,5 +34,3 @@ RSpec.describe PokemonFetchJob, type: :job do
     end
   end
 end
-
-
