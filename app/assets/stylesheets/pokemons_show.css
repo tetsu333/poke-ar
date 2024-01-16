@@ -1,0 +1,4 @@
+/* tailwindcssがカメラ表示に影響を与えているため */
+.a-fullscreen video {
+  max-width: none;
+}
