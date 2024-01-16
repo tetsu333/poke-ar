@@ -1,6 +1,6 @@
-<a-scene>
+<a-scene embedded arjs>
   <a-entity animation="property: object3D.position.y; to: 0.2; dir: alternate; dur: 2000; loop: true"> 
-    <a-image src="<%= @pokemon.image_url %>" width="2" height="2" position="0 1 -5"></a-image>
+    <a-image src="<%= @pokemon.image_url %>" width="1" height="1" position="0 1 -5"></a-image>
   </a-entity>
 </a-scene>
 <button onclick="window.close();" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">✕</button>
