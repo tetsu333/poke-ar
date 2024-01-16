@@ -1,4 +1,4 @@
-/* tailwindcssがカメラ表示に影響を与えているため */
-.a-fullscreen video {
+/* tailwindcssがカメラ表示に悪影響を与えているため */
+#arjs-video {
   max-width: none;
 }
