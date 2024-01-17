@@ -14,6 +14,7 @@ test:
   <<: *default
   database: myapp_test
   host: localhost
+  socket: /var/run/mysqld/mysqld.sock
   
 production:
   <<: *default
