@@ -26,12 +26,17 @@ jobs:
           ruby-version: "3.3.0"
           bundler-cache: true
 
-      - name: Database create and migrate
-        run: |
-          cp config/database.yml.ci config/database.yml
-          bundle exec rails db:create RAILS_ENV=test
-          bundle exec rails db:migrate RAILS_ENV=test
-          bundle exec rake assets:precompile
+      - name: Copy CI Database Configuration
+        run: cp config/database.yml.ci config/database.yml
+
+      - name: Create Database
+        run: bundle exec rails db:create RAILS_ENV=test
+
+      - name: Migrate Database
+        run: bundle exec rails db:migrate RAILS_ENV=test
+
+      - name: Precompile Assets
+        run: bundle exec rake assets:precompile
 
       - name: Run tests
         run: bundle exec rspec
