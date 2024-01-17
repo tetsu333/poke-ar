@@ -13,7 +13,6 @@ development:
 test:
   <<: *default
   database: myapp_test
-  host: mysql 
   
 production:
   <<: *default
