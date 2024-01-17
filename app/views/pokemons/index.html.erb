@@ -7,7 +7,7 @@
 <% @pokemons.each do |pokemon| %>
   <p class="flex items-center leading-9">
     <span class="mr-2 font-bold"><%= pokemon.pokedex_number %>:</span>
-    <%= link_to "#{pokemon.name}", pokemon, target: "_blank", class: "mr-2 text-blue-800 hover:text-blue-900" %>
+    <%= link_to "#{pokemon.name}", pokemon, class: "mr-2 text-blue-800 hover:text-blue-900" %>
     <img src="<%= pokemon.image_url %>" alt="<%= pokemon.image_url %>の画像" class="h-5 w-5 mr-2" />
     <%= link_to "交換", edit_pokemon_path(pokemon), class: "text-sm bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2" %>
     <%= link_to "逃す", pokemon_path(pokemon), data: { turbo_method: "delete", turbo_confirm: "本当に#{pokemon.name}を逃しますか？" }, class: "text-sm bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded" %>

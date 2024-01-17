@@ -10,10 +10,8 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= favicon_link_tag("favicon.ico") %>
-    <% if @useAframe %>
-      <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-      <script src="https://raw.githack.com/AR-js-org/AR.js/3.4.5/aframe/build/aframe-ar.js"></script>
-    <% end %>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/3.4.5/aframe/build/aframe-ar.js"></script>
   </head>
 
   <body class="bg-amber-50 text-gray-700">
