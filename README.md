@@ -1,6 +1,6 @@
 # ポケAR
 
-<img src="https://aws.macx.work/images/pikachu.jpg" width="200" alt="スクリーンショット">
+<img src="https://aws.macx.work/images/pokear.png" width="200" alt="スクリーンショット">
 
 ## 目次
 
@@ -14,7 +14,9 @@
 
 PokeAPIというポケモン画像を取得できるAPIを利用しています。
 
-個人的にポケモンが好きなのと、娘に喜んでもらうために作成しました。
+個人的にポケモンが好きなのと、子供に喜んでほしくて作成しました。
+
+<img src="https://aws.macx.work/images/pikachu.jpg" width="200" alt="スクリーンショット">
 
 ## 特徴
 
