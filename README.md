@@ -1,6 +1,6 @@
 # ポケAR
 
-<img src="https://aws.macx.work/images/pokear.png" width="200" alt="スクリーンショット">
+<img src="https://aws.macx.work/images/pokear.png" width="100" alt="スクリーンショット">
 
 ## 目次
 
