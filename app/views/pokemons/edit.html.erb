@@ -1,12 +1,18 @@
-<h1 class="text-4xl font-bold mb-4">交換</h1>
-<%= form_with(model: @pokemon) do |form| %>
-  <div class="mb-4">
-    <%= form.label :pokedex_number, "#{@pokemon.pokedex_number}:#{@pokemon.name}", class: "text-lg font-bold mb-2" %>
-    <%= form.hidden_field :pokedex_number %>
+<div class="flex flex-col items-center justify-center min-h-screen p-4">
+  <div class="w-full max-w-md px-8 py-6 bg-white shadow-lg rounded-lg">
+    <h1 class="text-3xl font-bold text-center text-gray-700 mb-8">交換</h1>
+    <%= form_with(model: @pokemon, class: "space-y-6") do |form| %>
+      <div>
+        <%= form.label :pokedex_number, "No.#{@pokemon.pokedex_number} #{@pokemon.name}", class: "block text-lg font-bold text-gray-700 mb-2" %>
+        <%= form.hidden_field :pokedex_number %>
+      </div>
+      <div class="flex justify-center">
+        <img src="<%= @pokemon.image_url %>" alt="<%= @pokemon.name %>の画像" class="object-cover object-center w-40 h-40" />
+      </div>
+      <%= form.submit "実行", data: { disable: true }, class: "w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out" %>
+    <% end %>
+    <div class="text-center mt-6">
+      <%= link_to "戻る", pokemons_path, class: "inline-block bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out" %>
+    </div>
   </div>
-  <%= form.submit "実行", data: { disable: true }, class: "text-lg text-white bg-green-500 hover:bg-green-700 font-bold py-2 px-4 rounded" %>
-  <img src="<%= @pokemon.image_url %>" alt="<%= @pokemon.name %>の画像" class="h-50 w-50 mb-4" />
-<% end %>
-<div class="my-4">
-  <%= link_to "戻る", pokemons_path, class: "text-lg text-white bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded" %>
 </div>
