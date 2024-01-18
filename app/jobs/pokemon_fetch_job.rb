@@ -40,8 +40,9 @@ class PokemonFetchJob < ApplicationJob
     image_urls.sample
   end
 
-  def handle_error(error)
-    Rails.logger.error "Error fetching Pokemon data: #{error.message}"
-    [Pokemon.new, error.message]
+  def handle_error(e)
+    Rails.logger.error "Error fetching Pokemon data: #{e.message}"
+    error_message = e.message.include?("Not Found") ? "見つかりませんでした" : "予期しないエラーが発生しました"
+    [Pokemon.new, error_message]
   end
 end
