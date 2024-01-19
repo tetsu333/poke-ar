@@ -17,7 +17,7 @@
       <div class="bg-white rounded-lg shadow">
         <p class="text-gray-600 pl-2 pt-2">No.<%= pokemon.pokedex_number %></p>
         <%= link_to pokemon, target: "_blank" do %>
-          <img src="<%= pokemon.image_url %>" alt="<%= pokemon.image_url %>の画像">
+          <img src="<%= pokemon.image_url %>" alt="<%= pokemon.image_url %>の画像" class="max-w-full h-auto">
         <% end %>
         <div class="p-4">
           <h2 class="text-xl font-bold"><%= pokemon.name %></h2>
