@@ -4,5 +4,6 @@ FactoryBot.define do
     pokedex_number { 25 }
     name { "ピカチュウ" }
     image_url { "https://example.com/image.jpg" }
+    association :user
   end
 end
