@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_many :pokemons
+
   before_save :downcase_email
 
   validates :name, presence: true, length: { maximum: 255 }

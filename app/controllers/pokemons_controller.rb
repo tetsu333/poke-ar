@@ -1,9 +1,9 @@
 class PokemonsController < ApplicationController
   before_action :current_user
-  before_action :set_pokemon, only: %i[ show edit update destroy ]
+  before_action :set_pokemon, only: %i[ show edit destroy ]
 
   def index
-    @pokemons = Pokemon.all.order(:pokedex_number)
+    @pokemons = Pokemon.where(user_id: @user).order(:pokedex_number)
   end
 
   def show
@@ -18,8 +18,8 @@ class PokemonsController < ApplicationController
   end
 
   def create
-    return redirect_to new_pokemon_path, alert: "既に登録済みです" if Pokemon.find_by(pokedex_number: pokemon_params[:pokedex_number])
-    @pokemon, message = PokemonFetchJob.perform_now(pokemon_params[:pokedex_number])
+    return redirect_to new_pokemon_path, alert: "既に登録済みです" if Pokemon.find_by(user_id: @user, pokedex_number: pokemon_params[:pokedex_number])
+    @pokemon, message = PokemonFetchJob.perform_now(pokemon_params[:pokedex_number], @user.id)
     if @pokemon.persisted?
       redirect_to pokemons_path, notice: "#{@pokemon.name}が登録されました"
     else
@@ -28,7 +28,7 @@ class PokemonsController < ApplicationController
   end
 
   def update
-    @pokemon, message = PokemonFetchJob.perform_now(pokemon_params[:pokedex_number])
+    @pokemon, message = PokemonFetchJob.perform_now(pokemon_params[:pokedex_number], @user.id)
     if @pokemon.persisted?
       redirect_to pokemons_path, notice: "新しい#{@pokemon.name}に交換されました"
     else
@@ -43,7 +43,8 @@ class PokemonsController < ApplicationController
 
   private
     def set_pokemon
-      @pokemon = Pokemon.find(params[:id])
+      @pokemon = Pokemon.find_by(id: params[:id], user_id: @user.id)
+      redirect_to "/404.html" if @pokemon.nil?
     end
 
     def pokemon_params

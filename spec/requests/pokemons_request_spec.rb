@@ -24,6 +24,7 @@ RSpec.describe "Pokemons", type: :request do
 
   describe "GET /pokemons/:id" do
     let(:pokemon) { create(:pokemon) }
+
     context "ログインしていない場合" do
       it "ログイン画面にリダイレクトする" do
         get pokemon_path(pokemon)
@@ -32,8 +33,7 @@ RSpec.describe "Pokemons", type: :request do
     end
 
     context "ログインしている場合" do
-      let(:user) { FactoryBot.create(:user) }
-      before { post create_sessions_path, params: { email: user.email, password: user.password } }
+      before { post create_sessions_path, params: { email: pokemon.user.email, password: pokemon.user.password } }
 
       it "詳細ページを表示する" do
         get pokemon_path(pokemon)
@@ -72,8 +72,7 @@ RSpec.describe "Pokemons", type: :request do
     end
 
     context "ログインしている場合" do
-      let(:user) { FactoryBot.create(:user) }
-      before { post create_sessions_path, params: { email: user.email, password: user.password } }
+      before { post create_sessions_path, params: { email: pokemon.user.email, password: pokemon.user.password } }
 
       it "編集ページを表示する" do
         get edit_pokemon_path(pokemon)
@@ -96,7 +95,8 @@ RSpec.describe "Pokemons", type: :request do
       before { post create_sessions_path, params: { email: user.email, password: user.password } }
 
       context "登録済みポケモンのpokedex_numberな場合" do
-        let!(:pokemon) { create(:pokemon) }
+        let!(:pokemon) { create(:pokemon, user_id: user.id) }
+
         it "登録せずに登録ページを表示する" do
           VCR.use_cassette("pokeapi") do
             expect {
@@ -109,7 +109,8 @@ RSpec.describe "Pokemons", type: :request do
       end
     
       context "未登録ポケモンのpokedex_numberな場合" do
-        let!(:pokemon) { create(:pokemon, name: "フシギダネ", pokedex_number: 1) }
+        let!(:pokemon) { create(:pokemon, name: "フシギダネ", pokedex_number: 1, user_id: user.id) }
+
         it "登録して一覧ページを表示する" do
           VCR.use_cassette("pokeapi") do
             expect {
@@ -147,14 +148,14 @@ RSpec.describe "Pokemons", type: :request do
     end
 
     context "ログインしている場合" do
-      let(:user) { FactoryBot.create(:user) }
-      before { post create_sessions_path, params: { email: user.email, password: user.password } }
+      before { post create_sessions_path, params: { email: pokemon.user.email, password: pokemon.user.password } }
 
       context "登録済みポケモンを更新する場合" do
         it "image_urlを更新して一覧ページを表示する" do
           old_image_url = pokemon.image_url
           old_name = pokemon.name
           old_pokedex_number = pokemon.pokedex_number
+          old_user_id = pokemon.user_id
   
           VCR.use_cassette("pokeapi") do
             expect {
@@ -163,6 +164,7 @@ RSpec.describe "Pokemons", type: :request do
   
             expect(pokemon.reload.name).to eq(old_name)
             expect(pokemon.reload.pokedex_number).to eq(old_pokedex_number)
+            expect(pokemon.reload.user_id).to eq(old_user_id)
             expect(response).to redirect_to(pokemons_path)
           end
         end
@@ -193,8 +195,7 @@ RSpec.describe "Pokemons", type: :request do
     end
 
     context "ログインしている場合" do
-      let(:user) { FactoryBot.create(:user) }
-      before { post create_sessions_path, params: { email: user.email, password: user.password } }
+      before { post create_sessions_path, params: { email: pokemon.user.email, password: pokemon.user.password } }
 
       it "ポケモンを削除して一覧ページを表示する" do
         expect {
