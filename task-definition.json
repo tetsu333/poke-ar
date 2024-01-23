@@ -18,31 +18,31 @@
           "environment": [
               {
                   "name": "DATABASE_USER_NAME",
-                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:DATABASE_USER_NAME::"
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:DATABASE_USER_NAME"
               },
               {
                   "name": "RAILS_ENV",
-                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:RAILS_ENV::"
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:RAILS_ENV"
               },
               {
                   "name": "BASIC_AUTH_PASSWORD",
-                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:BASIC_AUTH_PASSWORD::"
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:BASIC_AUTH_PASSWORD"
               },
               {
                   "name": "DATABASE_HOST",
-                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:DATABASE_HOST::"
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:DATABASE_HOST"
               },
               {
                   "name": "BASIC_AUTH_USER",
-                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:BASIC_AUTH_USER::"
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:BASIC_AUTH_USER"
               },
               {
                   "name": "SECRET_KEY_BASE",
-                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:SECRET_KEY_BASE::"
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:SECRET_KEY_BASE"
               },
               {
                   "name": "DATABASE_PASSWORD",
-                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:DATABASE_PASSWORD::"
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:DATABASE_PASSWORD"
               }
           ],
           "environmentFiles": [],
