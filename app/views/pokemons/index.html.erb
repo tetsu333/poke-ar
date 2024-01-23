@@ -14,17 +14,15 @@
   </div>
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
     <% @pokemons.each do |pokemon| %>
-      <div class="bg-white rounded-lg shadow">
-        <p class="text-gray-600 pl-2 pt-2">No.<%= pokemon.pokedex_number %></p>
+      <div class="bg-white rounded-lg shadow pb-4">
         <%= link_to pokemon, target: "_blank" do %>
+          <p class="text-gray-600 pl-2 pt-2">No.<%= pokemon.pokedex_number %></p>
           <img src="<%= pokemon.image_url %>" alt="<%= pokemon.image_url %>の画像">
+          <h2 class="text-xl font-bold pt-4 pl-4"><%= pokemon.name %></h2>
         <% end %>
-        <div class="p-4">
-          <h2 class="text-xl font-bold"><%= pokemon.name %></h2>
-          <div class="flex justify-center pt-2">
-            <%= link_to "交換", edit_pokemon_path(pokemon), class: "text-sm bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2" %>
-            <%= link_to "逃す", pokemon_path(pokemon), data: { turbo_method: "delete", turbo_confirm: "本当に#{pokemon.name}を逃しますか？" }, class: "text-sm bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded" %>
-          </div>
+        <div class="flex justify-center pt-2">
+          <%= link_to "交換", edit_pokemon_path(pokemon), class: "text-sm bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2" %>
+          <%= link_to "逃す", pokemon_path(pokemon), data: { turbo_method: "delete", turbo_confirm: "本当に#{pokemon.name}を逃しますか？" }, class: "text-sm bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded" %>
         </div>
       </div>
     <% end %>
