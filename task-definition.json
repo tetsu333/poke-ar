@@ -1,0 +1,117 @@
+{
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:891377290390:task-definition/pokeapi",
+  "containerDefinitions": [
+      {
+          "name": "rails",
+          "image": "891377290390.dkr.ecr.ap-northeast-1.amazonaws.com/railsecs:latest",
+          "cpu": 0,
+          "portMappings": [
+              {
+                  "name": "rails-3000-tcp",
+                  "containerPort": 3000,
+                  "hostPort": 3000,
+                  "protocol": "tcp",
+                  "appProtocol": "http"
+              }
+          ],
+          "essential": true,
+          "environment": [
+              {
+                  "name": "DATABASE_USER_NAME",
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:DATABASE_USER_NAME::"
+              },
+              {
+                  "name": "RAILS_ENV",
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:RAILS_ENV::"
+              },
+              {
+                  "name": "BASIC_AUTH_PASSWORD",
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:BASIC_AUTH_PASSWORD::"
+              },
+              {
+                  "name": "DATABASE_HOST",
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:DATABASE_HOST::"
+              },
+              {
+                  "name": "BASIC_AUTH_USER",
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:BASIC_AUTH_USER::"
+              },
+              {
+                  "name": "SECRET_KEY_BASE",
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:SECRET_KEY_BASE::"
+              },
+              {
+                  "name": "DATABASE_PASSWORD",
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:DATABASE_PASSWORD::"
+              }
+          ],
+          "environmentFiles": [],
+          "mountPoints": [],
+          "volumesFrom": [],
+          "ulimits": [],
+          "logConfiguration": {
+              "logDriver": "awslogs",
+              "options": {
+                  "awslogs-create-group": "true",
+                  "awslogs-group": "/ecs/pokeapi",
+                  "awslogs-region": "ap-northeast-1",
+                  "awslogs-stream-prefix": "ecs"
+              },
+              "secretOptions": []
+          }
+      }
+  ],
+  "family": "pokeapi",
+  "taskRoleArn": "arn:aws:iam::891377290390:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::891377290390:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "revision": 12,
+  "volumes": [],
+  "status": "ACTIVE",
+  "requiresAttributes": [
+      {
+          "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+      },
+      {
+          "name": "ecs.capability.execution-role-awslogs"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.ecr-auth"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.task-iam-role"
+      },
+      {
+          "name": "ecs.capability.execution-role-ecr-pull"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+      },
+      {
+          "name": "ecs.capability.task-eni"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+      }
+  ],
+  "placementConstraints": [],
+  "compatibilities": [
+      "EC2",
+      "FARGATE"
+  ],
+  "requiresCompatibilities": [
+      "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512",
+  "runtimePlatform": {
+      "cpuArchitecture": "X86_64",
+      "operatingSystemFamily": "LINUX"
+  },
+  "registeredAt": "2024-01-17T11:00:27.988Z",
+  "registeredBy": "arn:aws:iam::891377290390:user/tetsurou",
+  "tags": []
+}
