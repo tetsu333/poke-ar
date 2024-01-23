@@ -14,7 +14,7 @@
               }
           ],
           "essential": true,
-          "environment": [
+          "secrets": [
               {
                   "name": "DATABASE_USER_NAME",
                   "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:891377290390:secret:pokeapiTaskEnv-zYsSTC:DATABASE_USER_NAME"
