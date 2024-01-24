@@ -10,7 +10,6 @@ services:
       - mysql_volume:/var/lib/mysql
     ports:
       - "3306:3306"
-
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && ./bin/dev"
@@ -22,5 +21,10 @@ services:
     tty: true
     depends_on:
       - db
+  chrome:
+    image: selenium/standalone-chrome:latest
+    shm_size: 256m
+    ports:
+      - 4444:4444
 volumes:
   mysql_volume:

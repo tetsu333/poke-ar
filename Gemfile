@@ -54,6 +54,9 @@ group :test do
   gem "shoulda-matchers"
   gem "vcr"
   gem "webmock"
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem "webdrivers"
 end
 
 group :development do
