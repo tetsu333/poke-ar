@@ -18,6 +18,13 @@ jobs:
 
       chrome:
         image: selenium/standalone-chrome:latest
+        ports:
+          - 4444:4444
+        volumes:
+          - /dev/shm:/dev/shm
+
+    env:
+      SELENIUM_HOST: "localhost:4444"
 
     steps:
       - name: Checkout code

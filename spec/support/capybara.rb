@@ -2,7 +2,7 @@ require "capybara/rspec"
 require "selenium-webdriver"
 
 Capybara.register_driver :remote_chrome do |app|
-  url = "http://chrome:4444/wd/hub"
+  url = "http://#{ENV.fetch("SELENIUM_HOST")}/wd/hub"
   caps = ::Selenium::WebDriver::Options.chrome(
     "goog:chromeOptions" => {
       "args" => [
