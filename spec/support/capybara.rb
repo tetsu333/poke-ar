@@ -27,4 +27,6 @@ RSpec.configure do |config|
     Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
     Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
   end
+
+  Capybara.default_max_wait_time = 5
 end
