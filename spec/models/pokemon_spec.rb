@@ -1,12 +1,16 @@
 require "rails_helper"
 
 RSpec.describe Pokemon, type: :model do
+  describe "associations" do
+    it { is_expected.to belong_to(:user) }
+  end
+
   describe "validations" do
     let(:user) { FactoryBot.create(:user) }
     subject { Pokemon.new(pokedex_number: 1, name: "フシギダネ", image_url: "https://example.com/image.jpg", user_id: user.id) }
 
     it { is_expected.to validate_presence_of(:pokedex_number) }
-    it { is_expected.to validate_uniqueness_of(:pokedex_number) }
+    it { is_expected.to validate_uniqueness_of(:pokedex_number).scoped_to(:user_id) }
     it { is_expected.to validate_numericality_of(:pokedex_number).only_integer.is_greater_than_or_equal_to(1) }
 
     it { is_expected.to validate_presence_of(:name) }
@@ -18,4 +22,3 @@ RSpec.describe Pokemon, type: :model do
     it { is_expected.not_to allow_value("invalid_url").for(:image_url) }
   end
 end
-

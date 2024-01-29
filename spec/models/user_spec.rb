@@ -1,6 +1,10 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
+  describe "associations" do
+    it { is_expected.to have_many(:pokemons) }
+  end
+
   describe "validations" do
     subject { User.new(name: "テストユーザー", email: "test@example.com", password: "password1234") }
 
