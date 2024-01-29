@@ -10,7 +10,6 @@ if [ "$RAILS_ENV" = "production" ]; then
   # --------------------------------------
   # 本番環境（AWS ECS）への初回デプロイ時に利用
   # 初回デプロイ後にコメントアウトする
-  bundle exec rails db:drop
   bundle exec rails db:create
   # --------------------------------------
   # マイグレーション処理
