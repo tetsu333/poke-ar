@@ -10,7 +10,7 @@ RSpec.describe "ユーザー認証プロセス", type: :system do
     fill_in "パスワード確認", with: "pikachu25"
     click_button "作成"
     expect(page).to have_content "ようこそ。サトシさん"
-    click_link "HOME"
+    click_link "ホーム"
     click_link "ログアウト"
     fill_in "Eメール", with: "satoshi@poke.ar"
     fill_in "パスワード", with: "pikachu25"
